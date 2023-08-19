@@ -11,8 +11,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
-const Nav = () => {
+const Nav = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(()=> {
+    if (window.location.pathname == '/dashboard') {
+        setIsSignedIn(true);
+    }
+  }, [props]);
 
   return (
     isSignedIn ?
@@ -65,7 +71,7 @@ const Nav = () => {
             {/* Mobile */}
             <div className='sm:flex hidden'>
                 <button tyle="button" onClick={()=> { console.log("LOG ME HERE")}} className="outline_btn">
-                    Sign in
+                    Feedback
                 </button>
             </div>
         </nav>
