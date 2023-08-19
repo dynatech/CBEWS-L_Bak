@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
-*/
-
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -87,6 +83,10 @@
 
 .head_text {
   @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+}
+
+.subhead_text {
+  @apply mt-5 text-3xl font-extrabold leading-[1] text-primary-blue sm:text-4xl;
 }
 
 .orange_gradient {
