@@ -15,7 +15,8 @@ module.exports = {
         'primary-orange': '#F8991D',
         'primary-blue': '#16526D',
         'primary-maroon': '#991B1E',
-        'primary-green': '#006600'
+        'primary-green': '#006600',
+        'primary-red': '#991B1E'
       }
     },
   },
