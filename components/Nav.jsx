@@ -10,19 +10,15 @@ import AVATAR from '@public/icons/ProfileIcon.png';
 import { useEffect, useState } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
-const Nav = (props) => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  useEffect(()=> {
-    if (window.location.pathname == '/dashboard') {
-        setIsSignedIn(true);
-    }
-  }, [props]);
+const Nav = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
 
   return (
-    isSignedIn ?
+    session?.user ?
         <nav className='flex-between w-full pt-3 bg-transparent px-10 py-5'>
             <Link href="/" className="flex gap-3 flex-center">
                 <Image 
