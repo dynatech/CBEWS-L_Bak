@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 
 const Landing = () => {
