@@ -1,17 +1,12 @@
 'use client'
-
-import PDRRMO_SEAL from '@public/images/pdrrmo_seal.png';
-import MDRRMO_SEAL from '@public/images/mdrrmo_seal.png';
-import BRGY_SEAL from '@public/images/brgy_seal.png';
-import DOST_SEAL from '@public/images/dost_seal.png';
-import DYNASLOPE_SEAL from '@public/images/dynaslope_seal.png';
 import AVATAR from '@public/icons/ProfileIcon.png';
 
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import NavBarLogos from './NavBarLogos';
 
 const Nav = () => {
   const router = useRouter();
@@ -43,50 +38,17 @@ const Nav = () => {
   return (
     session?.user ?
         <nav className='flex-between w-full pt-3 bg-transparent px-10 py-5'>
-            <Link href="/" className="flex gap-3 flex-center">
-                <Image 
-                    src={DYNASLOPE_SEAL}
-                    alt="Dynaslope seal"
-                    width={75}
-                    height={75}
-                    className="object-contain"
-                />
-                <Image 
-                    src={DOST_SEAL}
-                    alt="Phivolcs seal"
-                    width={75}
-                    height={75}
-                    className="object-contain"
-                />
-                <Image 
-                    src={PDRRMO_SEAL}
-                    alt="PDRRMO seal"
-                    width={75}
-                    height={75}
-                    className="object-contain"
-                />
-                <Image 
-                    src={MDRRMO_SEAL}
-                    alt="PDRRMO seal"
-                    width={75}
-                    height={75}
-                    className="object-contain"
-                />
-                <Image 
-                    src={BRGY_SEAL}
-                    alt="BRGY seal"
-                    width={75}
-                    height={75}
-                    className="object-contain"
-                />
-                <Image 
-                    src={BRGY_SEAL}
-                    alt="LEWC seal"
-                    width={75}
-                    height={75}
-                    className="object-contain"
-                />
-            </Link>
+            <div className='flex gap-3 items-center'>
+                <NavBarLogos />
+                <div>
+                    <h1 className="nav_head_text text-left">
+                        <span className="blue_gradient text-left">Community Based Early Warning System for Landslides</span>
+                    </h1>
+                    <h1 className="nav_subhead_text text-left text-primary-blue">
+                        Brgy. Poblacion, Bakun, Benguet
+                    </h1>
+                </div>
+            </div>
             <div className='sm:flex hidden gap-4'>
                 <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" className="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button" onClick={()=> {toggleNotification();}}> 
                     <svg className="w-5 h-5 fill-primary-blue" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 14 20">

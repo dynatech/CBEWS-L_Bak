@@ -53,21 +53,26 @@ const Menu = (props) => {
                     </li>
                     <li>
                         <button onClick={() => { handleTabChange(2); router.push('/risk-profile'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 2 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
-                            Risk Profile
+                            Community Risk Assessment
                         </button>
                     </li>
                     <li>
-                        <button onClick={()=> { handleTabChange(3); router.push('/communications'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 3 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
+                        <button onClick={()=> { handleTabChange(3); router.push('/ground-data'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 3 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
+                            Ground Data
+                        </button>
+                    </li>
+                    <li>
+                        <button onClick={()=> { handleTabChange(4); router.push('/communications'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 4 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
                             Communications
                         </button>
                     </li>
                     <li>
-                        <button onClick={()=> { handleTabChange(4); router.push('/reports'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 4 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
+                        <button onClick={()=> { handleTabChange(5); router.push('/reports'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 5 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
                             Reports
                         </button>
                     </li>
                     <li>
-                        <button onClick={()=> { handleTabChange(5); router.push('/calendar'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 5 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
+                        <button onClick={()=> { handleTabChange(6); router.push('/calendar'); }} className={`block py-2 pl-3 pr-4 text-gray-200 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-700 md:p-0 ${activeTab === 6 ? `md:dark:text-primary-orange` : `md:dark:text-white`} md:dark:hover:text-primary-orange dark:hover:bg-gray-700 dark:hover:text-primary-orange md:dark:hover:bg-transparent`}>
                             Calendar
                         </button>
                     </li>

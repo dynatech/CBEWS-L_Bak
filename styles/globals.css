@@ -89,6 +89,14 @@
   @apply mt-5 text-3xl font-extrabold leading-[1] text-primary-blue sm:text-4xl;
 }
 
+.nav_head_text {
+  @apply text-3xl font-extrabold leading-[1] text-primary-blue sm:text-2xl;
+}
+
+.nav_subhead_text {
+  @apply text-3xl leading-[1] text-primary-blue sm:text-sm;
+}
+
 .orange_gradient {
   @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
@@ -98,7 +106,7 @@
 }
 
 .blue_gradient {
-  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-primary-blue to-cyan-600 bg-clip-text text-transparent;
 }
 
 .desc {
