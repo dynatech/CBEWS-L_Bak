@@ -74,7 +74,7 @@ const Nav = () => {
                             </div>
                             </div>
                             <div className="w-full pl-3">
-                                <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span className="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey, what's up? All set for the presentation?"</div>
+                                <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span className="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Kap! Maulan po dito samin ngayon."</div>
                                 <div className="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
                             </div>
                         </a>

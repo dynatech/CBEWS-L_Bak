@@ -5,6 +5,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-alert-0',
+    'bg-alert-1',
+    'bg-alert-2',
+    'bg-alert-3'
+  ],
   theme: {
     extend: {
       fontFamily: {
