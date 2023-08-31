@@ -26,7 +26,6 @@ const RootLayout = ({ children }) => {
                         <Footer />
                     </main>
                 </Provider>
-                {/* <script src={FLOWBITE}></script> */}
             </body>
         </html>
     )
