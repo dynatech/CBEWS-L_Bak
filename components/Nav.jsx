@@ -9,10 +9,10 @@ import { signOut, useSession } from 'next-auth/react';
 import NavBarLogos from './NavBarLogos';
 
 import {Flowbite} from 'flowbite-react';
-import withDarkMode from '@utils/withDarkMode';
+// import withDarkMode from '@utils/withDarkMode';
 
 const Nav = () => {
-    const FlowbiteWithDarkMode = withDarkMode(Flowbite);
+    // const FlowbiteWithDarkMode = withDarkMode(Flowbite);
 
     const router = useRouter();
     const { data: session } = useSession();
@@ -42,7 +42,7 @@ const Nav = () => {
 
     return (
         session?.user ?
-            <FlowbiteWithDarkMode>
+            // <FlowbiteWithDarkMode>
                 <nav className='flex-between w-full pt-3 bg-transparent px-10 py-5'>
                     <div className='flex gap-3 items-center'>
                         <NavBarLogos />
@@ -118,7 +118,7 @@ const Nav = () => {
                         </div>
                     </div>
                 </nav>
-            </FlowbiteWithDarkMode>
+            // </FlowbiteWithDarkMode>
             :
             <></>
     )
