@@ -2,6 +2,7 @@
 import LandingPageLogos from '@components/LandingPageLogos';
 import Swal from 'sweetalert2';
 import { LoginModal } from '@components/Modals/LoginModal.jsx';
+import { SignupModal } from '@components/Modals/SignupModal';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
@@ -12,6 +13,8 @@ const Landing = () => {
   const { data: session } = useSession();
 
   const [showModal, setShowModal] = useState(false);
+  const [showRegistrationModal, setRegistrationModal] = useState(false);
+  const [registrationDetails, setRegistrationDetails] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -40,6 +43,10 @@ const Landing = () => {
     })
   }
 
+  const handleSignup = () => {
+
+  }
+
   useEffect(() => {
     if (session?.user) {
       router.push('/dashboard');
@@ -65,7 +72,10 @@ const Landing = () => {
             setShowModal((prev) => !prev);
           }}>Log-in account
         </button>
-        <button tyle="button" className="text-white bg-primary-orange rounded-full p-4">
+        <button tyle="button" className="text-white bg-primary-orange rounded-full p-4" 
+          onClick={()=> {
+            setRegistrationModal((prev) => !prev); 
+          }}>
           Register an account
         </button>
       </div>
@@ -87,6 +97,23 @@ const Landing = () => {
         </>
       ) : null}
 
+      {
+        showRegistrationModal ? (
+          <>
+            <SignupModal
+              setShowModal={setRegistrationModal}
+              registrationDetails={registrationDetails}
+              setRegistrationDetails={setRegistrationDetails}
+              togglePasswordVisibility={togglePasswordVisibility}
+              handleSignup={handleSignup}
+              signupViaGoogle={() => signIn('google')} 
+              showPassword={showPassword}
+            />
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) :
+          null
+      }
     </section>
   )
 }
