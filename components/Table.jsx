@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react'
 
-const ExperimentalTable = ({ content, actions }) => {
+const Table = ({ content, actions }) => {
     const [tableContent, setTableContent] = useState(null);
     const [pages, setPages] = useState([]);
 
@@ -120,4 +120,4 @@ const ExperimentalTable = ({ content, actions }) => {
     )
 }
 
-export default ExperimentalTable
+export default Table

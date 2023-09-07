@@ -1,6 +1,6 @@
 'use client';
 import Tables from '@components/Tables';
-import ExperimentalTable from '@components/ExperimentalTable';
+import Table from '@components/Table';
 
 const SurficialMarkers = () => {
 
@@ -277,7 +277,7 @@ const SurficialMarkers = () => {
             <h4 className="font-bold text-primary-blue-100 text-4xl py-4 text-left">
               Surficial Markers
             </h4>
-            <ExperimentalTable content={DummySurficial}
+            <Table content={DummySurficial}
               actions={handleActions}
             />
           </div>

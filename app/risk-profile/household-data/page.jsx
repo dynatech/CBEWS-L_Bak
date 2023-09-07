@@ -1,9 +1,8 @@
 'use client';
 
 import Tables from '@components/Tables';
-import { Card } from 'flowbite-react';
-import ExperimentalTable from '@components/ExperimentalTable';
-import ExperimentalCard from '@components/ExperimentalCard';
+import Table from '@components/Table';
+import Card from '@components/Card';
 
 const HouseholdData = () => {
 
@@ -83,7 +82,7 @@ const HouseholdData = () => {
             <h4 className="font-bold text-primary-blue-100 text-4xl py-4 text-left">
               Household Data
             </h4>
-            <ExperimentalTable content={DummyData} actions={handleActions}/>
+            <Table content={DummyData} actions={handleActions}/>
             <div className="py-5">
               <button type="button" className="text-white bg-primary-blue rounded-md p-2">
                 <div className="flex justify-center items-center">
@@ -103,7 +102,7 @@ const HouseholdData = () => {
             <div className='grid grid-cols-4 gap-4'>
               {
                 VULNERABLE_CATEGORY.map((x) => (
-                  <ExperimentalCard type="normal" header={x.label} content={`Number of ${x.label}: ${0}`}/>
+                  <Card type="normal" header={x.label} content={`Number of ${x.label}: ${0}`}/>
                 ))
               }
             </div>

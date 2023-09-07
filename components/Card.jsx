@@ -46,7 +46,7 @@ const PreviewCard = () => {
     return (<h1>Prewview Card</h1>)
 }
 
-const ExperimentalCard = ({ type, header, content }) => {
+const Card = ({ type, header, content }) => {
 
     let Card = null;
     switch (type) {
@@ -66,4 +66,4 @@ const ExperimentalCard = ({ type, header, content }) => {
     return Card
 }
 
-export default ExperimentalCard
+export default Card
