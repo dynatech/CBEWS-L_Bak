@@ -2,35 +2,31 @@
 
 import Tables from '@components/Tables';
 import { Card } from 'flowbite-react';
+import ExperimentalTable from '@components/ExperimentalTable';
+import ExperimentalCard from '@components/ExperimentalCard';
 
 const HouseholdData = () => {
-  const TABLE_HEADERS = [
-    "Household #",
-    "Household Head",
-    "Member Count",
-    "Actions"
-  ];
 
-  const TABLE_CONTENT = [
+  const DummyData = {
+    headers: ["Household #",
+    "Household Head",
+    "Member Count"],
+    data: [{
+      household_id: '1',
+      household_head: 'Dingdong done test',
+      member_count: 2,
+    },
     {
       household_id: '1',
       household_head: 'Dingdong done test',
       member_count: 2,
-      actions: 'N/A'
     },
     {
-      household_id: '2',
-      household_head: 'Marian Hilera',
+      household_id: '1',
+      household_head: 'Dingdong done test',
       member_count: 2,
-      actions: 'N/A'
-    },
-    {
-      household_id: '3',
-      household_head: 'Cardo Daliri',
-      member_count: 4,
-      actions: 'N/A'
-    }
-  ]
+    },]
+  }
 
   const VULNERABLE_CATEGORY = [
     {
@@ -59,6 +55,26 @@ const HouseholdData = () => {
     }
   ];
 
+  const handleUpdate = () => {
+    console.log("HANDLE UPDATE")
+  }
+
+  const handleDelete = () => {
+    console.log("HANDLE DELETE")
+  }
+
+  const handleView = () => {
+    console.log("HANDLE VIEW")
+  }
+
+  const handleActions = () => {
+    return {
+      handleUpdate,
+      handleDelete,
+      handleView
+    }
+  }
+
   return (
     <div className="w-full pb-20">
       <div className="text-center pt-5">
@@ -67,10 +83,7 @@ const HouseholdData = () => {
             <h4 className="font-bold text-primary-blue-100 text-4xl py-4 text-left">
               Household Data
             </h4>
-            <Tables
-              headers={TABLE_HEADERS}
-              content={TABLE_CONTENT}
-              actions={() => { }} />
+            <ExperimentalTable content={DummyData} actions={handleActions}/>
             <div className="py-5">
               <button type="button" className="text-white bg-primary-blue rounded-md p-2">
                 <div className="flex justify-center items-center">
@@ -89,28 +102,8 @@ const HouseholdData = () => {
             </h4>
             <div className='grid grid-cols-4 gap-4'>
               {
-                VULNERABLE_CATEGORY.map((x, index) => (
-                  <Card
-                    className="max-w-sm"
-                    key={index}
-                  >
-                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        {x.label}
-                    </h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">
-                        No. of {x.label}: 0
-                    </p>
-                    <div className="py-5">
-                      <button type="button" className="text-white bg-primary-blue rounded-md p-2">
-                        <div className="flex justify-center items-center">
-                          <span className="pr-2">View details</span>
-                          <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01"/>
-                          </svg>
-                        </div>
-                      </button>
-                    </div>
-                  </Card>
+                VULNERABLE_CATEGORY.map((x) => (
+                  <ExperimentalCard type="normal" header={x.label} content={`Number of ${x.label}: ${0}`}/>
                 ))
               }
             </div>
