@@ -16,11 +16,11 @@ const Table = ({ content, actions }) => {
     return (
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="p-4 bg-white dark:bg-primary-blue border-t-2 border-r-2 border-l-2 border-gray-400">
-                <label for="table-search" class="sr-only">Search</label>
+                <label htmlFor="table-search" class="sr-only">Search</label>
                 <div class="relative mt-1">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
                     <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-100 border border-gray-100 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-white dark:placeholder-gray-100 dark:text-white dark:focus:ring-primary-orange dark:focus:border-primary-orange" placeholder="Search for items" />
@@ -32,12 +32,12 @@ const Table = ({ content, actions }) => {
                         <th scope="col" class="p-4">
                             <div class="flex items-center">
                                 <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-500 bg-gray-100 border-gray-100 rounded focus:ring-primary-orange dark:focus:ring-primary-orange dark:ring-primary-orange dark:focus:ring-offset-primary-orange focus:ring-1 dark:bg-gray-white dark:border-gray-100" />
-                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                                <label htmlFor="checkbox-all-search" class="sr-only">checkbox</label>
                             </div>
                         </th>
                         {
-                            tableContent && tableContent.headers.map((x) => (
-                                <th scope="col" class="px-6 py-3">
+                            tableContent?.headers.map((x, index) => (
+                                <th key={`h-${index}`} scope="col" class="px-6 py-3">
                                     <div class="flex items-center">
                                         {x}
                                         <a href="#"><svg class="w-3 h-3 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -54,25 +54,25 @@ const Table = ({ content, actions }) => {
                 </thead>
                 <tbody>
                     {
-                        tableContent && tableContent.data.map((x) => (
-                            <tr class="bg-gray-200 dark:bg-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-yellow-500 dark:text-gray-700 dark:hover:text-gray-100">
+                        tableContent?.data.map((x, index) => (
+                            <tr key={`tr-${index}`} class="bg-gray-200 dark:bg-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-yellow-500 dark:text-gray-700 dark:hover:text-gray-100">
                                 <td class="w-4 p-4 border-r-2 border-gray-400 border-b-2">
                                     <div class="flex items-center">
                                         <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-500 bg-gray-100 border-gray-100 rounded focus:ring-primary-orange dark:focus:ring-primary-orange dark:ring-primary-orange dark:focus:ring-offset-primary-orange focus:ring-1 dark:bg-gray-white dark:border-gray-700" />
-                                        <label for="checkbox-talbe-search-1" class="sr-only">checkbox</label>
+                                        <label htmlFor="checkbox-talbe-search-1" class="sr-only">checkbox</label>
                                     </div>
                                 </td>
                                 {
                                     Object.keys(x).map((key, index) => {
                                         if (index == 0) {
                                             return (
-                                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap border-r-2 border-gray-400 border-b-2">
+                                                <th key={`col-${index}`} scope="row" class="px-6 py-4 font-medium whitespace-nowrap border-r-2 border-gray-400 border-b-2">
                                                     {x[key]}
                                                 </th>
                                             )
                                         } else {
                                             return (
-                                                <td class="px-6 py-4 border-r-2 border-gray-400 border-b-2">
+                                                <td key={`col-${index}`} class="px-6 py-4 border-r-2 border-gray-400 border-b-2">
                                                     {x[key]}
                                                 </td>
                                             )
@@ -86,10 +86,10 @@ const Table = ({ content, actions }) => {
                                             <path d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
                                         </svg>
                                         <svg class="w-6 h-6 text-gray-800 dark:text-primary-blue hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
                                         </svg>
                                         <svg class="w-6 h-6 text-gray-800 dark:text-primary-blue hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01" />
+                                            <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M6 1h10M6 5h10M6 9h10M1.49 1h.01m-.01 4h.01m-.01 4h.01" />
                                         </svg>
                                     </div>
                                 </td>
@@ -105,9 +105,9 @@ const Table = ({ content, actions }) => {
                         <a href="#" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-primary-blue dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                     </li>
                     {
-                        [...Array(pages).keys()].map((x)=> (
+                        [...Array(pages).keys()].map((x, index)=> (
                             <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-primary-blue dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{x+1}</a>
+                                <a key={`p-${index}`} href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-primary-blue dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{x+1}</a>
                             </li>
                         ))
                     }

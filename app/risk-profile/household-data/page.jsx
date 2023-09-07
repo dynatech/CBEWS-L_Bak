@@ -1,6 +1,5 @@
 'use client';
 
-import Tables from '@components/Tables';
 import Table from '@components/Table';
 import Card from '@components/Card';
 
