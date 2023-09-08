@@ -540,7 +540,7 @@ function createGeneralNodeChart(series_name, data, input) {
   };
 }
 
-function SubsurfaceGraph(props) {
+function Subsurface(props) {
   const [subsurface_columns, setSubsurfaceColumns] = useState([])
 
   useEffect(() => {
@@ -602,7 +602,7 @@ function SubsurfaceGraph(props) {
     hour_value, include_comms_health: !isEOS
   };
 
-  const is_desktop = isWidthDown(width, "sm");
+  const is_desktop = true;
   const default_options = { title: { text: "Loading" } };
 
   const [options, setOptions] = useState([{ title: { text: "Loading" } }]);
@@ -648,18 +648,20 @@ function SubsurfaceGraph(props) {
 
   return (
     <Fragment>
-      <div style={{ marginTop: 16 }}>
+      <div className='grid grid-cols-2 gap-4'>
           {
             processed_data.length > 0 ? (options.map((option, i) => {
               const chart_update = true;
               const ref = chartRefs.current[i];
               return (
-                <HighchartsReact
-                  highcharts={Highcharts}
-                  allowChartUpdate={chart_update}
-                  options={option}
-                  ref={ref}
-                />
+                <div>
+                  <HighchartsReact
+                    highcharts={Highcharts}
+                    allowChartUpdate={chart_update}
+                    options={option}
+                    ref={ref}
+                  />
+                </div>
               );
             })) : (
               <></>
@@ -670,4 +672,4 @@ function SubsurfaceGraph(props) {
   );
 }
 
-export default SubsurfaceGraph;
+export default Subsurface;

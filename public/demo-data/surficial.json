@@ -1,0 +1,268 @@
+{
+    "marker_id": 55,
+    "marker_name": "A",
+    "name": "A",
+    "in_use": 1,
+    "marker_history": [
+      {
+        "ts": "2017-07-03 07:23:00",
+        "history_id": 55,
+        "marker_name": {
+          "marker_name": "A",
+          "name_id": 55
+        },
+        "event": "add",
+        "remarks": null
+      }
+    ],
+    "data": [
+      {
+        "x": 1686275100000,
+        "y": 153.5,
+        "data_id": 303575,
+        "mo_id": 75158,
+        "unreliable_data": {},
+        "observer_name": "CRACK ROSALINDAD "
+      },
+      {
+        "x": 1686618900000,
+        "y": 153.5,
+        "data_id": 303687,
+        "mo_id": 75180,
+        "unreliable_data": {},
+        "observer_name": "CRACK EDLINADULAWAN "
+      },
+      {
+        "x": 1686879900000,
+        "y": 153.5,
+        "data_id": 303956,
+        "mo_id": 75246,
+        "unreliable_data": {},
+        "observer_name": "CRACK MAURAGAM "
+      },
+      {
+        "x": 1687225080000,
+        "y": 153.6,
+        "data_id": 304115,
+        "mo_id": 75288,
+        "unreliable_data": {},
+        "observer_name": "CRACK FLORENCEBARCENAL "
+      },
+      {
+        "x": 1687484400000,
+        "y": 153.5,
+        "data_id": 304287,
+        "mo_id": 75334,
+        "unreliable_data": {},
+        "observer_name": "PREGRINAITO PURITABASTID "
+      },
+      {
+        "x": 1687829280000,
+        "y": 153.5,
+        "data_id": 304415,
+        "mo_id": 75360,
+        "unreliable_data": {},
+        "observer_name": "CRACK PLACIDATAO "
+      },
+      {
+        "x": 1688088900000,
+        "y": 153.5,
+        "data_id": 304524,
+        "mo_id": 75393,
+        "unreliable_data": {},
+        "observer_name": "CRACK EDLINADUL "
+      },
+      {
+        "x": 1688434320000,
+        "y": 153.5,
+        "data_id": 304618,
+        "mo_id": 75417,
+        "unreliable_data": {},
+        "observer_name": "MAURAGAM JENYL "
+      },
+      {
+        "x": 1688693700000,
+        "y": 153.5,
+        "data_id": 304749,
+        "mo_id": 75446,
+        "unreliable_data": {},
+        "observer_name": "CRACK "
+      },
+      {
+        "x": 1689038880000,
+        "y": 153.7,
+        "data_id": 304910,
+        "mo_id": 75479,
+        "unreliable_data": {},
+        "observer_name": "CRACK PURITABASTIDA "
+      },
+      {
+        "x": 1689298800000,
+        "y": 153.5,
+        "data_id": 304996,
+        "mo_id": 75505,
+        "unreliable_data": {},
+        "observer_name": "CRACK ROSALINDADICL "
+      },
+      {
+        "x": 1689643500000,
+        "y": 153.5,
+        "data_id": 305098,
+        "mo_id": 75529,
+        "unreliable_data": {},
+        "observer_name": "LAUREANITO EDLINADU "
+      },
+      {
+        "x": 1690248300000,
+        "y": 153.5,
+        "data_id": 305260,
+        "mo_id": 75583,
+        "unreliable_data": {},
+        "observer_name": "ROSEMARIESAO "
+      },
+      {
+        "x": 1690940400000,
+        "y": 153.4,
+        "data_id": 305555,
+        "mo_id": 75670,
+        "unreliable_data": {},
+        "observer_name": "EDLINADULAWAN LAUREANITO CHAD "
+      },
+      {
+        "x": 1691112300000,
+        "y": 153.1,
+        "data_id": 305637,
+        "mo_id": 75692,
+        "unreliable_data": {},
+        "observer_name": "CRACK FLORENCEBARCENAL "
+      },
+      {
+        "x": 1691458080000,
+        "y": 153.1,
+        "data_id": 305802,
+        "mo_id": 75738,
+        "unreliable_data": {},
+        "observer_name": "CRACK PURITABASTIDA "
+      },
+      {
+        "x": 1692064980000,
+        "y": 153.4,
+        "data_id": 306027,
+        "mo_id": 75794,
+        "unreliable_data": {},
+        "observer_name": "CRACK EDLINADULAWAN LAUREANI "
+      },
+      {
+        "x": 1692668400000,
+        "y": 153.2,
+        "data_id": 306178,
+        "mo_id": 75834,
+        "unreliable_data": {},
+        "observer_name": "FLORENCEBARCENAL ROSEMARIESAO "
+      },
+      {
+        "x": 1692927300000,
+        "y": 153.2,
+        "data_id": 306308,
+        "mo_id": 75867,
+        "unreliable_data": {},
+        "observer_name": "CRACK PURITABASTIDA PREG "
+      },
+      {
+        "x": 1693273140000,
+        "y": 153.1,
+        "data_id": 306405,
+        "mo_id": 75892,
+        "unreliable_data": {},
+        "observer_name": "CRACK ROSALINDADICLAS PLACID "
+      },
+      {
+        "x": 1693532040000,
+        "y": 153.1,
+        "data_id": 306666,
+        "mo_id": 75951,
+        "unreliable_data": {},
+        "observer_name": "CRACK EDLINADULAWAN "
+      },
+      {
+        "x": 1693637100000,
+        "y": 153.1,
+        "data_id": 306725,
+        "mo_id": 75963,
+        "unreliable_data": {},
+        "observer_name": "CRACK EDLINADULAWAN CHAD FROM "
+      },
+      {
+        "x": 1693694700000,
+        "y": 153.1,
+        "data_id": 306742,
+        "mo_id": 75965,
+        "unreliable_data": {},
+        "observer_name": "CRACK ANABLELAMBERTO JENYLYNLAGMAY "
+      },
+      {
+        "x": 1693710300000,
+        "y": 153.1,
+        "data_id": 306789,
+        "mo_id": 75972,
+        "unreliable_data": {},
+        "observer_name": "CRACK JENNYLYNLAGMAY ANABLELAMBERTO "
+      },
+      {
+        "x": 1693724460000,
+        "y": 153.1,
+        "data_id": 306800,
+        "mo_id": 75974,
+        "unreliable_data": {},
+        "observer_name": "CRACK ANABLELAMBERTO JENYLYNLAGMAY "
+      },
+      {
+        "x": 1693782180000,
+        "y": 153.1,
+        "data_id": 306819,
+        "mo_id": 75977,
+        "unreliable_data": {},
+        "observer_name": "CRACK FLORENCEBARCENAL ROSEMARIESAO "
+      },
+      {
+        "x": 1693867500000,
+        "y": 153,
+        "data_id": 306870,
+        "mo_id": 75988,
+        "unreliable_data": {},
+        "observer_name": "CRACK PURITABASTIDA PREGRINAITO "
+      },
+      {
+        "x": 1693881300000,
+        "y": 153,
+        "data_id": 306973,
+        "mo_id": 76016,
+        "unreliable_data": {},
+        "observer_name": "PURITABASTIDA PREGRINAITO "
+      },
+      {
+        "x": 1693964340000,
+        "y": 153.1,
+        "data_id": 307062,
+        "mo_id": 76041,
+        "unreliable_data": {},
+        "observer_name": "CRACK PLACIDATAO ROSALINDADICLAS "
+      },
+      {
+        "x": 1694050140000,
+        "y": 152.9,
+        "data_id": 307080,
+        "mo_id": 76045,
+        "unreliable_data": {},
+        "observer_name": "CRACK EDLINADULAWAN LAUREANITO "
+      },
+      {
+        "x": 1694137140000,
+        "y": 152.9,
+        "data_id": 307200,
+        "mo_id": 76076,
+        "unreliable_data": {},
+        "observer_name": "ANABELLAMBERTO JENNYLYNLAGMAY "
+      }
+    ]
+  }
