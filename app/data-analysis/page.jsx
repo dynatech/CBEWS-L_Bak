@@ -14,7 +14,6 @@ const DataAnalysis = () => {
           <Rainfall />
           <Subsurface />
           <Surficial />
-          <Earthquake />
         </div>
       </div>
     </div>
