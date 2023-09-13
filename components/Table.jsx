@@ -15,19 +15,19 @@ const Table = ({ content, actions }) => {
 
     return (
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div class="p-4 bg-white dark:bg-primary-blue border-t-2 border-r-2 border-l-2 border-gray-400">
+            <div class="p-4 bg-primary-blue dark:bg-primary-blue border-t-2 border-r-2 border-l-2 border-gray-400">
                 <label htmlFor="table-search" class="sr-only">Search</label>
                 <div class="relative mt-1">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-gray-200 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
-                    <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-100 border border-gray-100 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-white dark:placeholder-gray-100 dark:text-white dark:focus:ring-primary-orange dark:focus:border-primary-orange" placeholder="Search for items" />
+                    <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-100 border border-gray-100 rounded-lg w-80 bg-gray-600 placeholder-gray-100 text-white focus:ring-primary-orange focus:border-primary-orange dark:bg-gray-600 dark:border-white dark:placeholder-gray-100 dark:text-white dark:focus:ring-primary-orange dark:focus:border-primary-orange" placeholder="Search for items" />
                 </div>
             </div>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-l-2 border-r-2 border-b-2 border-gray-400 drop-shadow-lg">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-primary-blue dark:text-primary-orange">
+            <table class="w-full text-sm text-left text-gray-400 dark:text-gray-400 border-l-2 border-r-2 border-b-2 border-gray-400 drop-shadow-lg">
+                <thead class="text-xs text-primary-orange bg-primary-blue uppercase dark:bg-primary-blue dark:text-primary-orange">
                     <tr>
                         <th scope="col" class="p-4">
                             <div class="flex items-center">
@@ -66,13 +66,13 @@ const Table = ({ content, actions }) => {
                                     Object.keys(x).map((key, index) => {
                                         if (index == 0) {
                                             return (
-                                                <th key={`col-${index}`} scope="row" class="px-6 py-4 font-medium whitespace-nowrap border-r-2 border-gray-400 border-b-2">
+                                                <th key={`col-${index}`} scope="row" class="px-6 text-gray-700 py-4 font-medium whitespace-nowrap border-r-2 border-gray-400 border-b-2">
                                                     {x[key]}
                                                 </th>
                                             )
                                         } else {
                                             return (
-                                                <td key={`col-${index}`} class="px-6 py-4 border-r-2 border-gray-400 border-b-2">
+                                                <td key={`col-${index}`} class="px-6 py-4 text-gray-700 border-r-2 border-gray-400 border-b-2">
                                                     {x[key]}
                                                 </td>
                                             )
