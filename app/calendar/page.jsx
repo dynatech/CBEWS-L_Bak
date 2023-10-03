@@ -6,7 +6,7 @@ import { DateRange } from 'react-date-range';
 import { Card } from 'flowbite-react';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import '/styles/globals.css';
+import '@styles/globals.css';
 import Table from '@components/Table';
 
 
