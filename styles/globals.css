@@ -176,3 +176,42 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
+
+
+.container {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  padding: 20px;
+  gap: 20px;
+}
+
+.rdrMonth {
+  width: 100% !important;
+}
+
+.rdrCalendarWrapper {
+  font-size: 35px !important;
+  width: 100% !important;
+}
+
+.rdrDateDisplayWrapper {
+  display: none !important;
+}
+
+.calendar {
+  flex-grow: 1;
+  width: 100%;
+  border-radius: 5px; 
+  
+}
+
+.activity-list {
+  flex-grow: 1;
+  border: 2px solid #16526d;
+  border-radius: 10px;
+  padding: 20px;
+ 
+}
+
+
