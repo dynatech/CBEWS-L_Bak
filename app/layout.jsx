@@ -15,9 +15,8 @@ const RootLayout = ({ children }) => {
             <body>
                 <Provider>
                     <div className="main">
-                        <div className='gradient' />
                     </div>
-                    <main className='app'>
+                    <main className='app' style={{minHeight: '100vh'}}>
                         <Nav />
                         <Menu />
                         <div>

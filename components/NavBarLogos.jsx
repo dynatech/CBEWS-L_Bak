@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const NavBarLogos = () => {
   return (
-    <Link href="/" className="flex gap-3 flex-center">
+    <div className="flex gap-3 flex-center">
         <Image 
             src={DYNASLOPE_SEAL}
             alt="Dynaslope seal"
@@ -51,7 +51,7 @@ const NavBarLogos = () => {
             height={55}
             className="object-contain"
         />
-    </Link>
+    </div>
   )
 }
 
