@@ -13,8 +13,8 @@ export const LoginModal = ({
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
       <div className="relative w-auto my-6 mx-auto max-w-3xl">
         <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-            <h3 className="text-3xl font-semibold text-gray-600">
+          <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t">
+            <h3 className=" p-3 text-3xl font-semibold text-gray-600">
               Log-in account
             </h3>
             <button
@@ -26,9 +26,9 @@ export const LoginModal = ({
               </span>
             </button>
           </div>
-          <div className="relative p-6 flex-auto">
+          <div className="relative p-3 flex-auto">
             <div className="flex text-center w-full flex-col gap-4 p-5">
-              <div className="mb-4">
+              <div className="mb-2">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2 text-left"
                   htmlFor="username"
@@ -46,7 +46,7 @@ export const LoginModal = ({
                   />
                 </div>
               </div>
-              <div className="mb-4">
+              <div className="mb-2">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2 text-left"
                   htmlFor="password"
@@ -121,7 +121,7 @@ export const LoginModal = ({
                   Login
                 </button>
               </div>
-              <div className="flex items-center justify-center space-x-4">
+              {/* <div className="flex items-center justify-center space-x-4">
                 <hr className="flex-grow border-gray-300 border-t-2" />
                 <span className="text-gray-500">OR</span>
                 <hr className="flex-grow border-gray-300 border-t-2" />
@@ -135,7 +135,7 @@ export const LoginModal = ({
                 >
                   Sign in with Google
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
