@@ -21,6 +21,15 @@ const HazardMap = () => {
     };
   }, []);
 
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = Map.src; 
+    link.download = 'HazardMap.jpg'; 
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="w-full pt-18">
       <div className="text-center">
@@ -40,10 +49,9 @@ const HazardMap = () => {
 
           </div>
           <div>
-            <button tyle="button" className="text-white bg-primary-blue rounded-full p-4 flex-center mb-2"
-              onClick={() => {
-
-              }}>Download Hazard Map
+            <button type="button" className="text-white bg-primary-blue rounded-full p-4 flex-center mb-2"
+              onClick={handleDownload}>
+                Download Hazard Map
             </button>
           </div>
         </div>
