@@ -121,7 +121,7 @@ export const LoginModal = ({
                   Login
                 </button>
               </div>
-              {/* <div className="flex items-center justify-center space-x-4">
+              <div className="flex items-center justify-center space-x-4">
                 <hr className="flex-grow border-gray-300 border-t-2" />
                 <span className="text-gray-500">OR</span>
                 <hr className="flex-grow border-gray-300 border-t-2" />
@@ -135,7 +135,7 @@ export const LoginModal = ({
                 >
                   Sign in with Google
                 </button>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
