@@ -91,13 +91,9 @@ const HouseholdModal = (props) => {
         members: tempMembers,
       };
 
-      console.log("submit data", submitData);
-
       if (action == "add") {
         addHousehold(submitData, (response) => {
           if (response.status) {
-            console.log(response);
-
             fetchAll();
             handleClose();
             setOpenPrompt(true);
@@ -116,7 +112,6 @@ const HouseholdModal = (props) => {
       } else if (action == "edit") {
         editHousehold(submitData, (response) => {
           if (response.status) {
-            console.log("edit", response);
             fetchAll();
             handleClose();
             setOpenPrompt(true);

@@ -9,10 +9,9 @@ const VulnerableHouseholdModal = (props) => {
   } = props;
 
   const columns = [
-    { name: "house_hold_no", label: "Household #" },
-    { name: "head", label: "Household Head" },
+    { name: "household_id", label: "Household #" },
+    { name: "household_head", label: "Household Head" },
     { name: "count", label: "Member Count" },
-    // { name: "actions", label: "Actions" },
   ];
 
   const handleView = () => {
@@ -29,9 +28,14 @@ const VulnerableHouseholdModal = (props) => {
       <div className="relative w-9/12 my-6 mx-auto max-w-3x">
         <div className="border-0 rounded-lg shadow-lg flex flex-col w-full outline-none bg-white focus:outline-none overflow-y-scroll">
           <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t bg-white">
-            <h3 className="p-3 text-3xl font-semibold text-gray-600">
-              {vulnerableGroup}
-            </h3>
+            <div className="text-left">
+              <h3 className=" px-3 text-3xl font-semibold text-gray-600">
+                {vulnerableGroup}
+              </h3>
+              <h3 className="px-3 text-xl font-semibold text-gray-600">
+                Household/s with vulnerable members
+              </h3>
+            </div>
             <button
               className="ml-10 bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
               onClick={() => {

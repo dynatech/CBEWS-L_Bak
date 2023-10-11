@@ -23,7 +23,6 @@ const HouseholdData = (props) => {
     let tempHouseholds = [];
 
     getAllHouseholds((response) => {
-      console.log("please");
       if (response.status) {
         response.data.map((household) => {
           let tempMembers = [];
@@ -61,32 +60,32 @@ const HouseholdData = (props) => {
   const [action, setAction] = useState("add");
 
   const handleUpdate = (index) => {
-    setHouseholdHead(households[index]);
-    setHouseholdMembers(households[index].members);
+    let tempHousehold = households.filter((x) => x.id == index.id)[0];
+    console.log("temp", tempHousehold);
+    setHouseholdHead(tempHousehold);
+    setHouseholdMembers(tempHousehold.members);
     setShowModal(true);
     setAction("edit");
   };
 
-  const [indexToDelete, setIndexToDelete] = useState(null);
+  const [toDelete, setToDelete] = useState(null);
 
   const confirmDelete = (response) => {
-    console.log("delete response", response);
     setAction("delete");
     setOpenPrompt(true);
     setErrorPrompt(false);
     setPromptTitle("Are you sure you want to delete this household?");
     setNotifMessage("This household information will be deleted immediately.");
     setConfirmation(true);
-    setIndexToDelete(response);
+    setToDelete(households.filter((x) => x.id == response.id)[0]);
   };
 
   const handleDelete = (index) => {
     // let submitData = {
-    //   id: households[indexToDelete].id,
+    //   id: households[toDelete].id,
     // };
 
-    deleteHousehold({ id: households[indexToDelete].id }, (response) => {
-      console.log(response);
+    deleteHousehold({ id: toDelete.id }, (response) => {
       if (response.status) {
         setOpenPrompt(true);
         setErrorPrompt(false);
@@ -94,7 +93,7 @@ const HouseholdData = (props) => {
         setNotifMessage(response.message);
         setConfirmation(false);
         fetchAll();
-        setIndexToDelete(null);
+        setToDelete(null);
       } else {
         setOpenPrompt(true);
         setErrorPrompt(true);
@@ -102,10 +101,9 @@ const HouseholdData = (props) => {
         setNotifMessage(response.message);
         setConfirmation(false);
         fetchAll();
-        setIndexToDelete(null);
+        setToDelete(null);
       }
     });
-    console.log("HANDLE DELETE");
   };
 
   const handleView = () => {
@@ -206,7 +204,7 @@ const HouseholdData = (props) => {
               handleDelete();
             }
           } else if (response == false) {
-            setIndexToDelete(null);
+            setToDelete(null);
           }
         }}
       />

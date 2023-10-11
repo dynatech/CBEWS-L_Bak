@@ -1,13 +1,26 @@
 import Card from "@components/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VulnerableHouseholdModal from "@components/Modals/VulnerableHouseholdModal";
 
+import {
+  getPregnant,
+  getChildren,
+  getComorbid,
+  getDisabled,
+  getSenior,
+  getToddler,
+  getSummary,
+  getAllHouseholds,
+} from "@apis/CapacityAndVulnerability";
+
 const VulnerableHousehold = (props) => {
-  const { data } = props;
+  const { households } = props;
 
   const [showVulnerableModal, setShowVulnerableModal] = useState(false);
   const [vulnerableGroup, setVulnerableGroup] = useState(null);
   const [vulnerableHouseholds, setVulnerableHouseholds] = useState([]);
+
+  const [vulnerables, setVulnerables] = useState([]);
 
   const VULNERABLE_CATEGORY = [
     {
@@ -27,20 +40,213 @@ const VulnerableHousehold = (props) => {
       label: "Senior Citizens",
     },
     {
-      key: "children_6_12",
+      key: "children",
       label: "Children (Ages 6 to 12)",
     },
     {
-      key: "children_0_5",
+      key: "toddler",
       label: "Children (Ages 0 to 5)",
     },
   ];
 
   const handleViewMore = (x) => {
-    setVulnerableHouseholds(data);
+    // setVulnerableHouseholds(data);
+
+    let tempHouseholds = [];
+
+    if (x.key == "pregnant") {
+      getPregnant((response) => {
+        if (response.status) {
+          response.data.map((household) => {
+            let tempMembers = [];
+
+            household.members.map((member) => {
+              tempMembers.push({
+                ...member,
+                disabled: member.disability != null ? true : false,
+                comorbid: member.comorbidity != null ? true : false,
+              });
+            });
+
+            tempHouseholds.push({
+              ...household,
+              count: household.members.length,
+              disabled: household.disability != null ? true : false,
+              comorbid: household.comorbidity != null ? true : false,
+              members: tempMembers,
+            });
+          });
+          setVulnerableHouseholds(tempHouseholds);
+        }
+      });
+    } else if (x.key == "disabled") {
+      getDisabled((response) => {
+        if (response.status) {
+          response.data.map((household) => {
+            let tempMembers = [];
+
+            console.log(household.members);
+            household.members.map((member) => {
+              tempMembers.push({
+                ...member,
+                disabled: member.disability != null ? true : false,
+                comorbid: member.comorbidity != null ? true : false,
+              });
+            });
+            tempHouseholds.push({
+              ...household,
+              count: household.members.length,
+              disabled: household.disability != null ? true : false,
+              comorbid: household.comorbidity != null ? true : false,
+              members: tempMembers,
+            });
+          });
+          setVulnerableHouseholds(tempHouseholds);
+        }
+      });
+    } else if (x.key == "comorbid") {
+      getComorbid((response) => {
+        if (response.status) {
+          response.data.map((household) => {
+            let tempMembers = [];
+
+            household.members.map((member) => {
+              tempMembers.push({
+                ...member,
+                disabled: member.disability != null ? true : false,
+                comorbid: member.comorbidity != null ? true : false,
+              });
+            });
+
+            tempHouseholds.push({
+              ...household,
+              count: household.members.length,
+              disabled: household.disability != null ? true : false,
+              comorbid: household.comorbidity != null ? true : false,
+              members: tempMembers,
+            });
+          });
+          setVulnerableHouseholds(tempHouseholds);
+        }
+      });
+    } else if (x.key == "children") {
+      getChildren((response) => {
+        if (response.status) {
+          response.data.map((household) => {
+            let tempMembers = [];
+
+            household.members.map((member) => {
+              tempMembers.push({
+                ...member,
+                disabled: member.disability != null ? true : false,
+                comorbid: member.comorbidity != null ? true : false,
+              });
+            });
+
+            tempHouseholds.push({
+              ...household,
+              count: household.members.length,
+              disabled: household.disability != null ? true : false,
+              comorbid: household.comorbidity != null ? true : false,
+              members: tempMembers,
+            });
+          });
+          setVulnerableHouseholds(tempHouseholds);
+        }
+      });
+    } else if (x.key == "toddler") {
+      getToddler((response) => {
+        if (response.status) {
+          response.data.map((household) => {
+            let tempMembers = [];
+
+            household.members.map((member) => {
+              tempMembers.push({
+                ...member,
+                disabled: member.disability != null ? true : false,
+                comorbid: member.comorbidity != null ? true : false,
+              });
+            });
+
+            tempHouseholds.push({
+              ...household,
+              count: household.members.length,
+              disabled: household.disability != null ? true : false,
+              comorbid: household.comorbidity != null ? true : false,
+              members: tempMembers,
+            });
+          });
+          setVulnerableHouseholds(tempHouseholds);
+        }
+      });
+    } else if (x.key == "senior") {
+      getSenior((response) => {
+        if (response.status) {
+          response.data.map((household) => {
+            let tempMembers = [];
+
+            household.members.map((member) => {
+              tempMembers.push({
+                ...member,
+                disabled: member.disability != null ? true : false,
+                comorbid: member.comorbidity != null ? true : false,
+              });
+            });
+
+            tempHouseholds.push({
+              ...household,
+              count: household.members.length,
+              disabled: household.disability != null ? true : false,
+              comorbid: household.comorbidity != null ? true : false,
+              members: tempMembers,
+            });
+          });
+          setVulnerableHouseholds(tempHouseholds);
+        }
+      });
+    }
+
     setVulnerableGroup(x.label);
     setShowVulnerableModal(true);
   };
+
+  useEffect(() => {
+    console.log("pumapasok here");
+    getSummary((response) => {
+      setVulnerables([
+        {
+          key: "pregnant",
+          label: "Pregnant",
+          count: response.pregnant_count,
+        },
+        {
+          key: "disabled",
+          label: "Person with disability",
+          count: response.disability_count,
+        },
+        {
+          key: "comorbid",
+          label: "Person with comorbidity",
+          count: response.comorbidity_count,
+        },
+        {
+          key: "senior",
+          label: "Senior Citizens",
+          count: response.seniors_count,
+        },
+        {
+          key: "children",
+          label: "Children (Ages 6 to 12)",
+          count: response.children_count,
+        },
+        {
+          key: "toddler",
+          label: "Children (Ages 0 to 5)",
+          count: response.toddler_count,
+        },
+      ]);
+    });
+  }, [households]);
 
   return (
     <div>
@@ -52,7 +258,7 @@ const VulnerableHousehold = (props) => {
         // className="bg-yellow-200 flex-wrap flex gap-3"
         style={{ height: "30vh" }}
       >
-        {VULNERABLE_CATEGORY.map((x) => (
+        {vulnerables.map((x) => (
           //   <Card
           //     type="normal"
           //     header={x.label}
@@ -66,7 +272,7 @@ const VulnerableHousehold = (props) => {
                 </h5>
               </a>
               <p class="mb-3 font-normal text-primary-blue dark:text-primary-blue">
-                {`Number of ${x.label}: ${0}`}
+                {`Number of ${x.label}: ${x.count}`}
               </p>
             </div>
 
