@@ -6,6 +6,11 @@ const VulnerableHouseholdModal = (props) => {
     vulnerableHouseholds,
     setShowVulnerableModal,
     setVulnerableHouseholds,
+
+    setHouseholdHead,
+    setHouseholdMembers,
+    setAction,
+    setShowModal,
   } = props;
 
   const columns = [
@@ -14,8 +19,11 @@ const VulnerableHouseholdModal = (props) => {
     { name: "count", label: "Member Count" },
   ];
 
-  const handleView = () => {
-    console.log("handle view uwu");
+  const handleView = (x) => {
+    setHouseholdHead(x);
+    setHouseholdMembers(x.members);
+    setShowModal(true);
+    setAction("view");
   };
 
   const handleClose = () => {
@@ -24,7 +32,7 @@ const VulnerableHouseholdModal = (props) => {
   };
 
   return (
-    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black bg-opacity-25">
+    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-30 outline-none focus:outline-none bg-black bg-opacity-25">
       <div className="relative w-9/12 my-6 mx-auto max-w-3x">
         <div className="border-0 rounded-lg shadow-lg flex flex-col w-full outline-none bg-white focus:outline-none overflow-y-scroll">
           <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t bg-white">

@@ -3,10 +3,12 @@
 import HouseholdModal from "@components/Modals/HouseholdModal";
 import Table from "@components/Table";
 import VulnerableHousehold from "@components/VulnerableHousehold";
+import VulnerableHouseholdModal from "@components/Modals/VulnerableHouseholdModal";
 import { useEffect, useState } from "react";
 import {
   getAllHouseholds,
   deleteHousehold,
+  getSummary,
 } from "@apis/CapacityAndVulnerability";
 import PromptModal from "@components/Modals/PromptModal";
 
@@ -18,6 +20,11 @@ const HouseholdData = (props) => {
   const [confirmation, setConfirmation] = useState(false);
 
   const [households, setHouseholds] = useState([]);
+
+  const [vulnerables, setVulnerables] = useState([]);
+  const [showVulnerableModal, setShowVulnerableModal] = useState(false);
+  const [vulnerableGroup, setVulnerableGroup] = useState(null);
+  const [vulnerableHouseholds, setVulnerableHouseholds] = useState([]);
 
   const fetchAll = () => {
     let tempHouseholds = [];
@@ -46,6 +53,41 @@ const HouseholdData = (props) => {
         setHouseholds(tempHouseholds);
       }
     });
+
+    getSummary((response) => {
+      setVulnerables([
+        {
+          key: "pregnant",
+          label: "Pregnant",
+          count: response.pregnant_count,
+        },
+        {
+          key: "disabled",
+          label: "Person with disability",
+          count: response.disability_count,
+        },
+        {
+          key: "comorbid",
+          label: "Person with comorbidity",
+          count: response.comorbidity_count,
+        },
+        {
+          key: "senior",
+          label: "Senior Citizens",
+          count: response.seniors_count,
+        },
+        {
+          key: "children",
+          label: "Children (Ages 6 to 12)",
+          count: response.children_count,
+        },
+        {
+          key: "toddler",
+          label: "Children (Ages 0 to 5)",
+          count: response.toddler_count,
+        },
+      ]);
+    });
   };
 
   const columns = [
@@ -60,10 +102,9 @@ const HouseholdData = (props) => {
   const [action, setAction] = useState("add");
 
   const handleUpdate = (index) => {
-    let tempHousehold = households.filter((x) => x.id == index.id)[0];
-    console.log("temp", tempHousehold);
-    setHouseholdHead(tempHousehold);
-    setHouseholdMembers(tempHousehold.members);
+    // let tempHousehold = households.filter((x) => x.id == index.id)[0];
+    setHouseholdHead(index);
+    setHouseholdMembers(index.members);
     setShowModal(true);
     setAction("edit");
   };
@@ -77,7 +118,7 @@ const HouseholdData = (props) => {
     setPromptTitle("Are you sure you want to delete this household?");
     setNotifMessage("This household information will be deleted immediately.");
     setConfirmation(true);
-    setToDelete(households.filter((x) => x.id == response.id)[0]);
+    setToDelete(response.id);
   };
 
   const handleDelete = (index) => {
@@ -85,7 +126,7 @@ const HouseholdData = (props) => {
     //   id: households[toDelete].id,
     // };
 
-    deleteHousehold({ id: toDelete.id }, (response) => {
+    deleteHousehold({ id: toDelete }, (response) => {
       if (response.status) {
         setOpenPrompt(true);
         setErrorPrompt(false);
@@ -166,7 +207,13 @@ const HouseholdData = (props) => {
             </div>
           </div>
           <hr className="my-4 mx-16 h-0.5 border-t-0 bg-neutral-300 opacity-100 dark:opacity-50" />
-          <VulnerableHousehold data={households} />
+          <VulnerableHousehold
+            vulnerables={vulnerables}
+            //qq
+            setVulnerableHouseholds={setVulnerableHouseholds}
+            setVulnerableGroup={setVulnerableGroup}
+            setShowVulnerableModal={setShowVulnerableModal}
+          />
         </div>
       </div>
 
@@ -190,6 +237,20 @@ const HouseholdData = (props) => {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+
+      {showVulnerableModal && (
+        <VulnerableHouseholdModal
+          vulnerableGroup={vulnerableGroup}
+          vulnerableHouseholds={vulnerableHouseholds}
+          setShowVulnerableModal={setShowVulnerableModal}
+          setVulnerableHouseholds={setVulnerableHouseholds}
+          //
+          setHouseholdHead={setHouseholdHead}
+          setHouseholdMembers={setHouseholdMembers}
+          setAction={setAction}
+          setShowModal={setShowModal}
+        />
+      )}
 
       <PromptModal
         isOpen={openPrompt}

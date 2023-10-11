@@ -14,44 +14,18 @@ import {
 } from "@apis/CapacityAndVulnerability";
 
 const VulnerableHousehold = (props) => {
-  const { households } = props;
+  const {
+    vulnerables,
+    setShowVulnerableModal,
+    setVulnerableGroup,
+    setVulnerableHouseholds,
+  } = props;
 
-  const [showVulnerableModal, setShowVulnerableModal] = useState(false);
-  const [vulnerableGroup, setVulnerableGroup] = useState(null);
-  const [vulnerableHouseholds, setVulnerableHouseholds] = useState([]);
-
-  const [vulnerables, setVulnerables] = useState([]);
-
-  const VULNERABLE_CATEGORY = [
-    {
-      key: "pregnant",
-      label: "Pregnant",
-    },
-    {
-      key: "disabled",
-      label: "Person with disability",
-    },
-    {
-      key: "comorbid",
-      label: "Person with comorbidity",
-    },
-    {
-      key: "senior_citizen",
-      label: "Senior Citizens",
-    },
-    {
-      key: "children",
-      label: "Children (Ages 6 to 12)",
-    },
-    {
-      key: "toddler",
-      label: "Children (Ages 0 to 5)",
-    },
-  ];
+  // const [showVulnerableModal, setShowVulnerableModal] = useState(false);
+  // const [vulnerableGroup, setVulnerableGroup] = useState(null);
+  // const [vulnerableHouseholds, setVulnerableHouseholds] = useState([]);
 
   const handleViewMore = (x) => {
-    // setVulnerableHouseholds(data);
-
     let tempHouseholds = [];
 
     if (x.key == "pregnant") {
@@ -210,44 +184,6 @@ const VulnerableHousehold = (props) => {
     setShowVulnerableModal(true);
   };
 
-  useEffect(() => {
-    console.log("pumapasok here");
-    getSummary((response) => {
-      setVulnerables([
-        {
-          key: "pregnant",
-          label: "Pregnant",
-          count: response.pregnant_count,
-        },
-        {
-          key: "disabled",
-          label: "Person with disability",
-          count: response.disability_count,
-        },
-        {
-          key: "comorbid",
-          label: "Person with comorbidity",
-          count: response.comorbidity_count,
-        },
-        {
-          key: "senior",
-          label: "Senior Citizens",
-          count: response.seniors_count,
-        },
-        {
-          key: "children",
-          label: "Children (Ages 6 to 12)",
-          count: response.children_count,
-        },
-        {
-          key: "toddler",
-          label: "Children (Ages 0 to 5)",
-          count: response.toddler_count,
-        },
-      ]);
-    });
-  }, [households]);
-
   return (
     <div>
       <h4 className="font-bold text-primary-blue-100 text-4xl py-4 text-left">
@@ -303,14 +239,19 @@ const VulnerableHousehold = (props) => {
         ))}
       </div>
 
-      {showVulnerableModal && (
+      {/* {showVulnerableModal && (
         <VulnerableHouseholdModal
           vulnerableGroup={vulnerableGroup}
           vulnerableHouseholds={vulnerableHouseholds}
           setShowVulnerableModal={setShowVulnerableModal}
           setVulnerableHouseholds={setVulnerableHouseholds}
+          //
+          // setHouseholdHead={setHouseholdHead}
+          // setHouseholdMembers={setHouseholdMembers}
+          // setAction={setAction}
+          // setShowModal={setShowModal}
         />
-      )}
+      )} */}
     </div>
   );
 };
