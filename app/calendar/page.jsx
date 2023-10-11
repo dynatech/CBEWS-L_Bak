@@ -8,45 +8,32 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import '@styles/globals.css';
 import Table from '@components/Table';
+import { getEvent, addEvent, deleteEvent } from '@app/api/apis/ActivityManagemant';
 
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [calendarDate, setCalendarDate] = useState(new Date());
   const [activities, setActivities] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    details: '',
+    activity_id: 0,
+    activity_name: '',
+    activity_place: '',
+    activity_note: '',
     startDate: '',
     endDate: '',
   });
-  const [showForm, setShowForm] = useState(false);
-
+  
   useEffect(() => {
-    const initialActivities = JSON.parse(localStorage.getItem('activities')) || [];
-    setActivities(initialActivities);
+    getEvent({}, (response) => {
+      setActivities(response);
+    });
   }, []);
 
-  const ActivityData = {
-    headers: ["Activity name", "Activity details", "Start date", "End date"],
-    data: activities
-    
-  }
-
-  const addActivity = (newActivity) => {
-    const updatedActivities = [...activities, newActivity];
-    setActivities(updatedActivities);
-    localStorage.setItem('activities', JSON.stringify(updatedActivities));
-  };
-
-  const handleCalendarDateChange = (date) => {
-    setCalendarDate(date);
-    setSelectedDate(date); 
-  };
-
   const isDateInRange = (activity, selectedDate) => {
-    const startDate = new Date(activity.startDate);
-    const endDate = new Date(activity.endDate);
+    const startDate = new Date(activity.start);
+    const endDate = new Date(activity.end);
     return (
       (startDate <= selectedDate && selectedDate <= endDate) ||
       startDate.toDateString() === selectedDate.toDateString()
@@ -54,22 +41,35 @@ const Calendar = () => {
   };
 
   const filteredActivities = activities.filter((activity) => {
-    return (
-      selectedDate &&
-      isDateInRange(activity, selectedDate)
-    );
+    return selectedDate && isDateInRange(activity, selectedDate);
   });
+
+  const handleCalendarDateChange = (date) => {
+    setCalendarDate(date);
+    setSelectedDate(date);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormData((prevFormData) => ({ ...prevFormData, activity_id: 0 }));
 
-    console.log('Form data:', formData);
+    addEvent(formData, (response) => {
+      console.log('Activity added:', response);
 
-    addActivity(formData);
+      if (response) {
+        setActivities([...activities, response]);
 
+        getEvent({}, (updatedResponse) => {
+          setActivities(updatedResponse);
+        });
+      }
+    });
+  
     setFormData({
-      title: '',
-      details: '',
+      activity_id: 0,
+      activity_name: '',
+      activity_place: '',
+      activity_note: '',
       startDate: '',
       endDate: '',
     });
@@ -81,9 +81,21 @@ const Calendar = () => {
     setShowForm(!showForm);
   };
 
+  const ActivityData = {
+    headers: ["Activity name", "Activity place", "Activity details", "Start date", "End date"],
+    data: activities.map((activity) => ({
+      "Activity name": activity.title,
+      "Activity place": activity.place,
+      "Activity details": activity.note,
+      "Start date": activity.start,
+      "End date": activity.end,
+    }),
+  )};
+
+
   return (
     <div className="w-full pb-20">
-      <div className="container mx-auto px-10" style={{ marginTop: '50px' }}>
+      <div className="container mx-auto px-10 flex" style={{ marginTop: '50px' }}>
         <div className="calendar">
           <DateRange
             editableDateInputs={false}
@@ -105,9 +117,9 @@ const Calendar = () => {
                 filteredActivities.map((activity, index) => (
                   <div key={index}>
                     <h5 className="text-1xl font-bold tracking-tight text-gray-900 dark:text-white">{activity.title}</h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">{activity.details}</p>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">Start Date: {activity.startDate}</p>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">End Date: {activity.endDate}</p>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">{activity.note}</p>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">Start Date: {activity.start}</p>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">End Date: {activity.end}</p>
                   </div>
                 ))
               ) : (
@@ -136,25 +148,37 @@ const Calendar = () => {
                   </span>
                   <form onSubmit={handleSubmit}>
                     <div>
-                      <label htmlFor="title">Activity Name:</label>
+                      <label htmlFor="activity_name">Activity Name:</label>
                       <input
                         type="text"
-                        id="title"
-                        value={formData.title}
+                        id="activity_name"
+                        value={formData.activity_name}
                         onChange={(e) =>
-                          setFormData({ ...formData, title: e.target.value })
+                          setFormData({ ...formData, activity_name: e.target.value })
                         }
                         required
                         style={{ width: '100%' }}
                       />
                     </div>
                     <div>
-                      <label htmlFor="details">Activity Details:</label>
+                      <label htmlFor="activity_place">Activity Place:</label>
                       <textarea
-                        id="details"
-                        value={formData.details}
+                        id="activity_place"
+                        value={formData.activity_place}
                         onChange={(e) =>
-                          setFormData({ ...formData, details: e.target.value })
+                          setFormData({ ...formData, activity_place: e.target.value })
+                        }
+                        required
+                        style={{ width: '100%' }}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="activity_note">Activity Details:</label>
+                      <textarea
+                        id="activity_note"
+                        value={formData.activity_note}
+                        onChange={(e) =>
+                          setFormData({ ...formData, activity_note: e.target.value })
                         }
                         required
                         style={{ width: '100%' }}
