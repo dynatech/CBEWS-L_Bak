@@ -17,7 +17,6 @@ const Table = (props) => {
   const [pages, setPages] = useState([]);
 
   const [whichPage, setWhichPage] = useState(0);
-  // const [numberOfItemsPerPage, setNumberOfItemsPerPage] = useState(10);
 
   const from = whichPage * numberOfItemsPerPage + 1;
   const to = Math.min((whichPage + 1) * numberOfItemsPerPage, rows.length);
@@ -161,8 +160,7 @@ const Table = (props) => {
                       <button
                         className="bg-transparent"
                         onClick={() => {
-                          // console.log(actions);
-                          onEdit(index);
+                          onEdit(x);
                         }}
                       >
                         <svg
@@ -182,7 +180,7 @@ const Table = (props) => {
                         className="
                     bg-transparent"
                         onClick={() => {
-                          onDelete(index);
+                          onDelete(x);
                         }}
                       >
                         <svg
@@ -205,7 +203,9 @@ const Table = (props) => {
                     {onView && (
                       <button
                         className="bg-transparent"
-                        onClick={actions?.handleView}
+                        onClick={() => {
+                          onDelete(x);
+                        }}
                       >
                         <svg
                           class="w-6 h-6 text-gray-600 dark:text-primary-blue hover:text-gray-900"
