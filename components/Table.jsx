@@ -204,7 +204,7 @@ const Table = (props) => {
                       <button
                         className="bg-transparent"
                         onClick={() => {
-                          onDelete(x);
+                          onView(x);
                         }}
                       >
                         <svg

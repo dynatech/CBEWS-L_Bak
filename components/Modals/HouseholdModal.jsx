@@ -144,7 +144,8 @@ const HouseholdModal = (props) => {
         >
           <div className="flex items-start justify-between p-3 border-b border-solid border-slate-200 rounded-t bg-white">
             <h3 className="p-3 text-3xl font-semibold text-gray-600">
-              {action == "add" ? "Add" : "Edit"} Household
+              {action == "add" ? "Add " : action == "view" ? "View " : "Edit "}
+              Household
             </h3>
             <button
               className="ml-10 bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -171,6 +172,7 @@ const HouseholdModal = (props) => {
                 </label>
                 <div className="relative">
                   <input
+                    disabled={action == "view"}
                     type="text"
                     name="hh_id"
                     className={`shadow appearance-none border ${
@@ -202,6 +204,7 @@ const HouseholdModal = (props) => {
                 </label>
                 <div className="relative">
                   <input
+                    disabled={action == "view"}
                     type="text"
                     name="hh_head"
                     className={`shadow appearance-none border ${
@@ -234,6 +237,7 @@ const HouseholdModal = (props) => {
                   </label>
                   <div>
                     <input
+                      disabled={action == "view"}
                       type="date"
                       name="hh_birthday"
                       className={`shadow appearance-none border ${
@@ -306,6 +310,7 @@ const HouseholdModal = (props) => {
                 householdHead.gender == "F" && (
                   <div className="mb-1 flex items-center">
                     <input
+                      disabled={action == "view"}
                       type="checkbox"
                       name="hh_pregnant"
                       className="shadow appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -328,6 +333,7 @@ const HouseholdModal = (props) => {
                 )}
               <div className="mb-1 flex items-center">
                 <input
+                  disabled={action == "view"}
                   type="checkbox"
                   name="hh_disabled"
                   className="shadow appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -358,6 +364,7 @@ const HouseholdModal = (props) => {
                     </label>
                     <div className="relative">
                       <input
+                        disabled={action == "view"}
                         type="text"
                         name="hh_disability"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -378,6 +385,7 @@ const HouseholdModal = (props) => {
                 )}
               <div className="mb-1 flex items-center">
                 <input
+                  disabled={action == "view"}
                   type="checkbox"
                   name="hh_comorbid"
                   className="shadow appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -408,6 +416,7 @@ const HouseholdModal = (props) => {
                     </label>
                     <div className="relative">
                       <input
+                        disabled={action == "view"}
                         type="text"
                         name="hh_comorbidity"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -463,6 +472,7 @@ const HouseholdModal = (props) => {
                       </label>
                       <div className="relative">
                         <input
+                          disabled={action == "view"}
                           type="text"
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           placeholder="Ex: Juan Dela Cruz"
@@ -488,6 +498,7 @@ const HouseholdModal = (props) => {
                         </label>
                         <div>
                           <input
+                            disabled={action == "view"}
                             type="date"
                             className={`shadow appearance-none border w-full rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${
                               householdMembers[index].hasOwnProperty(
@@ -549,6 +560,7 @@ const HouseholdModal = (props) => {
                       householdMembers[index].gender == "F" && (
                         <div className="mb-4 flex items-center">
                           <input
+                            disabled={action == "view"}
                             type="checkbox"
                             className="shadow appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             // placeholder="Ex: Juan Dela Cruz"
@@ -571,6 +583,7 @@ const HouseholdModal = (props) => {
 
                     <div className="mb-4 flex items-center">
                       <input
+                        disabled={action == "view"}
                         type="checkbox"
                         className="shadow appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         // placeholder="Ex: Juan Dela Cruz"
@@ -597,6 +610,7 @@ const HouseholdModal = (props) => {
                           </label>
                           <div className="relative">
                             <input
+                              disabled={action == "view"}
                               type="text"
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               placeholder="Prefer not to say"
@@ -621,6 +635,7 @@ const HouseholdModal = (props) => {
                       )}
                     <div className="mb-4 flex items-center">
                       <input
+                        disabled={action == "view"}
                         type="checkbox"
                         className="shadow appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         // placeholder="Ex: Juan Dela Cruz"
@@ -647,6 +662,7 @@ const HouseholdModal = (props) => {
                           </label>
                           <div className="relative">
                             <input
+                              disabled={action == "view"}
                               type="text"
                               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                               placeholder="Prefer not to say"
@@ -672,26 +688,30 @@ const HouseholdModal = (props) => {
                   </div>
                 ))}
 
-              <div className="mb-1 flex">
-                <button
-                  className="text-white bg-primary-blue rounded-full pl-4 pr-4 pt-2 pb-2 "
-                  type="button"
-                  onClick={() => handleAddMember()}
-                >
-                  Add Member
-                </button>
-              </div>
-              <div className="mb-1">
-                <button
-                  className="text-white bg-primary-blue rounded-full pl-4 pr-4 pt-2 pb-2 "
-                  type="button"
-                  onClick={() => {
-                    handleSubmit();
-                  }}
-                >
-                  {action == "add" ? "Add New" : "Update"} Household
-                </button>
-              </div>
+              {action != "view" && (
+                <>
+                  <div className="mb-1 flex">
+                    <button
+                      className="text-white bg-primary-blue rounded-full pl-4 pr-4 pt-2 pb-2 "
+                      type="button"
+                      onClick={() => handleAddMember()}
+                    >
+                      Add Member
+                    </button>
+                  </div>
+                  <div className="mb-1">
+                    <button
+                      className="text-white bg-primary-blue rounded-full pl-4 pr-4 pt-2 pb-2 "
+                      type="button"
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                    >
+                      {action == "add" ? "Add New" : "Update"} Household
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
