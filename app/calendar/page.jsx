@@ -10,6 +10,7 @@ import Table from '@components/Table';
 import { getEvent, deleteEvent } from '@apis/ActivityManagement';
 import PromptModal from "@components/Modals/PromptModal";
 import ActivityModal from '@components/Modals/ActivityModal';
+import { format } from 'date-fns';
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -24,6 +25,11 @@ const Calendar = () => {
   const [action, setAction] = useState("add");
   const [indexToDelete, setIndexToDelete] = useState(null);
   const [indexToEdit, setIndexToEdit] = useState(null);
+  const [nameToEdit, setNameToEdit] = useState(null);
+  const [placeToEdit, setPlaceToEdit] = useState(null);
+  const [detailsToEdit, setDetailsToEdit] = useState(null);
+  const [startToEdit, setStartToEdit] = useState(null);
+  const [endToEdit, setEndToEdit] = useState(null);
   
   useEffect(() => {
     getEvent({}, (response) => {
@@ -65,6 +71,11 @@ const Calendar = () => {
     setShowForm(true);
     setAction("edit");
     setIndexToEdit(index.id);
+    setNameToEdit(index.title);
+    setPlaceToEdit(index.place);
+    setDetailsToEdit(index.note);
+    setStartToEdit(index.start);
+    setEndToEdit(index.end);
   } else {
     console.log("handleupdate error");
   }
@@ -115,6 +126,38 @@ const Calendar = () => {
     console.log("HANDLE DELETE");
   };
 
+  function hasActivitiesForDate (date) {
+    return activities.some((activity) => {
+      const startDate = new Date(activity.start);
+      const endDate = new Date(activity.end);
+      return (
+            (startDate <= date && date <= endDate) ||
+            startDate.toDateString() === date.toDateString()
+          );
+    });
+  };
+
+  function customDayContent(day) {
+    return (
+      <div>
+        {hasActivitiesForDate(day) && (
+          <div
+            style={{
+              height: "7px",
+              width: "7px",
+              borderRadius: "100%",
+              background: "orange",
+              position: "absolute",
+              bottom: 15,
+              right: 64,
+            }}
+          />
+        )}
+        <span>{format(day, "d")}</span>
+      </div>
+    );
+  }
+  
 
   return (
     <div className="w-full pb-20">
@@ -126,6 +169,7 @@ const Calendar = () => {
             moveRangeOnFirstSelection={false}
             ranges={[{ startDate: calendarDate, endDate: calendarDate, key: 'selection' }]}
             className="date"
+            dayContentRenderer={customDayContent}
           />
         </div>
         <hr className="my-4 mx-50 h-0.5 border-t-0 bg-neutral-300 opacity-100 dark:opacity-50" />
@@ -176,6 +220,11 @@ const Calendar = () => {
               onClose={() => setShowForm(false)}
               fetchUpdatedData={fetchUpdatedData}
               indexToEdit={indexToEdit}
+              nameToEdit={nameToEdit}
+              placeToEdit={placeToEdit}
+              detailsToEdit={detailsToEdit}
+              startToEdit={startToEdit}
+              endToEdit={endToEdit}
             />
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
