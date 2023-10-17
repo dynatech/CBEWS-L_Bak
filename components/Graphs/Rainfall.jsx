@@ -6,6 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import moment from 'moment';
 // import { getRainfallPlotData } from '../../apis/analysis';
 import RAINFALL_DATA from '@public/demo-data/rainfall.json';
+import { getRainfallPlotData } from '@apis/Rainfall';
 
 function computeForStartTs(ts, duration = 7, unit = 'days') {
     if (unit === 'all') {
@@ -551,7 +552,7 @@ function Rainfall(props) {
         moment(ts_start, 'YYYY-MM-DD HH:mm:ss'),
         'days',
     );
-    const input = { days_diff, ts_start, ts_end, site_code: 'mar' };
+    const input = { days_diff, ts_start, ts_end, site_code: 'bak' };
 
     const default_options = {
         cumulative: prepareCumulativeRainfallChartOption(default_data, input),
@@ -560,7 +561,9 @@ function Rainfall(props) {
 
     const getDataFn = () => {
         setProcessedData([]);
-        setRainfallData([RAINFALL_DATA]);
+        getRainfallPlotData(input, data => {
+            setRainfallData(data);
+        });
     };
 
     useEffect(() => {
@@ -597,6 +600,7 @@ function Rainfall(props) {
 
     return (
         <Fragment>
+            <div className='grid grid-cols-2 gap-8'>
             {rainfall_data.length > 0 ? (
                 chartRefs.current.map((ref, i) => {
                     let opt = { ...default_options };
@@ -625,6 +629,7 @@ function Rainfall(props) {
             ) : (
                 <div />
             )}
+            </div>
         </Fragment>
     );
 }
