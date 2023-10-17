@@ -13,15 +13,20 @@ const ActivityModal = (props) => {
     setConfirmation,
     onClose,
     indexToEdit,
+    nameToEdit,
+    placeToEdit,
+    detailsToEdit,
+    startToEdit,
+    endToEdit,
   } = props;
 
   const [formData, setFormData] = useState({
     activity_id: action === 'edit' ? indexToEdit : 0,
-    activity_name: '',
-    activity_place: '',
-    activity_note: '',
-    startDate: '',
-    endDate: '',
+    activity_name: action === 'edit' ? nameToEdit : '',
+    activity_place: action === 'edit' ? placeToEdit : '',
+    activity_note: action === 'edit' ? detailsToEdit : '',
+    start: action === 'edit' ? startToEdit : '',
+    end: action === 'edit' ? endToEdit : '',
   });
 
   const handleClose = () => {
@@ -67,8 +72,8 @@ const ActivityModal = (props) => {
             activity_name: "",
             activity_place: "",
             activity_note: "",
-            startDate: "",
-            endDate: "",
+            start: "",
+            end: "",
           });       
           handleClose();
            } else {
@@ -124,7 +129,7 @@ const ActivityModal = (props) => {
                   type="text"
                   id="activity_name"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Enter activity name"
+                  placeholder="Enter activity name"                  
                   value={formData.activity_name}
                   onChange={(e) =>
                   setFormData({ ...formData, activity_name: e.target.value })}
@@ -185,9 +190,9 @@ const ActivityModal = (props) => {
                   id="startDate"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter start date of activity"
-                  value={formData.startDate}
+                  value={formData.start}
                   onChange={(e) =>
-                  setFormData({ ...formData, startDate: e.target.value })}
+                  setFormData({ ...formData, start: e.target.value })}
                  required
                 />
               </div>
@@ -206,9 +211,9 @@ const ActivityModal = (props) => {
                   id="endDate"
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Enter end date of activity"
-                  value={formData.endDate}
+                  value={formData.end}
                   onChange={(e) =>
-                  setFormData({ ...formData, endDate: e.target.value })}
+                  setFormData({ ...formData, end: e.target.value })}
                  required
                 />
               </div>

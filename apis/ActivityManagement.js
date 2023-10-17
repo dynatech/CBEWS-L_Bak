@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// const API_URL='http://192.168.150.237:5000'
-import { API_URL } from "@config";
+const API_URL='http://192.168.150.237:5000'
+// import { API_URL } from "@config";
 
 const getEvent = (data,callback) => {
     console.log("API_URL", API_URL)
