@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -8,45 +7,33 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import '@styles/globals.css';
 import Table from '@components/Table';
-
+import { getEvent, deleteEvent } from '@apis/ActivityManagement';
+import PromptModal from "@components/Modals/PromptModal";
+import ActivityModal from '@components/Modals/ActivityModal';
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [calendarDate, setCalendarDate] = useState(new Date());
   const [activities, setActivities] = useState([]);
-  const [formData, setFormData] = useState({
-    title: '',
-    details: '',
-    startDate: '',
-    endDate: '',
-  });
   const [showForm, setShowForm] = useState(false);
-
+  const [openPrompt, setOpenPrompt] = useState(false);
+  const [errorPrompt, setErrorPrompt] = useState(false);
+  const [promptTitle, setPromptTitle] = useState("");
+  const [notifMessage, setNotifMessage] = useState("");
+  const [confirmation, setConfirmation] = useState(false);
+  const [action, setAction] = useState("add");
+  const [indexToDelete, setIndexToDelete] = useState(null);
+  const [indexToEdit, setIndexToEdit] = useState(null);
+  
   useEffect(() => {
-    const initialActivities = JSON.parse(localStorage.getItem('activities')) || [];
-    setActivities(initialActivities);
+    getEvent({}, (response) => {
+      setActivities(response);
+    });
   }, []);
 
-  const ActivityData = {
-    headers: ["Activity name", "Activity details", "Start date", "End date"],
-    data: activities
-    
-  }
-
-  const addActivity = (newActivity) => {
-    const updatedActivities = [...activities, newActivity];
-    setActivities(updatedActivities);
-    localStorage.setItem('activities', JSON.stringify(updatedActivities));
-  };
-
-  const handleCalendarDateChange = (date) => {
-    setCalendarDate(date);
-    setSelectedDate(date); 
-  };
-
   const isDateInRange = (activity, selectedDate) => {
-    const startDate = new Date(activity.startDate);
-    const endDate = new Date(activity.endDate);
+    const startDate = new Date(activity.start);
+    const endDate = new Date(activity.end);
     return (
       (startDate <= selectedDate && selectedDate <= endDate) ||
       startDate.toDateString() === selectedDate.toDateString()
@@ -54,36 +41,84 @@ const Calendar = () => {
   };
 
   const filteredActivities = activities.filter((activity) => {
-    return (
-      selectedDate &&
-      isDateInRange(activity, selectedDate)
-    );
+    return selectedDate && isDateInRange(activity, selectedDate);
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log('Form data:', formData);
-
-    addActivity(formData);
-
-    setFormData({
-      title: '',
-      details: '',
-      startDate: '',
-      endDate: '',
-    });
-
-    setShowForm(false);
+  const handleCalendarDateChange = (date) => {
+    setCalendarDate(date);
+    setSelectedDate(date);
   };
 
   const handleAddActivity = () => {
+    setAction("add");
     setShowForm(!showForm);
   };
 
+  const fetchUpdatedData = () => {
+    getEvent({}, (updatedResponse) => {
+      setActivities(updatedResponse);
+    });
+  };
+
+  const handleUpdate = (index) => {
+    if (index) {
+    setShowForm(true);
+    setAction("edit");
+    setIndexToEdit(index.id);
+  } else {
+    console.log("handleupdate error");
+  }
+  };
+
+  const columns = [
+    { name: "title", label: "Activity name" },
+    { name: "place", label: "Activity place" },
+    { name: "note", label: "Activity details" },
+    { name: "start", label: "Start date" },
+    { name: "end", label: "End date" },
+  ];
+
+  const confirmDelete = (response) => {
+    console.log("delete response", response);
+    setAction("delete");
+    setOpenPrompt(true);
+    setErrorPrompt(false);
+    setPromptTitle("Are you sure you want to delete this activity?");
+    setNotifMessage("This activity will be deleted immediately.");
+    setConfirmation(true);
+    setIndexToDelete(response);
+  };
+
+  const handleDeleteActivity = (index) => {
+    
+    deleteEvent({ activity_id: indexToDelete.id }, (response) => {
+      console.log(response);
+      if (response.status) {
+        setOpenPrompt(true);
+        setErrorPrompt(false);
+        setPromptTitle("Success");
+        setNotifMessage(response.feedback);
+        setConfirmation(false);
+        setIndexToDelete(null);
+        fetchUpdatedData();
+
+      } else {
+        setOpenPrompt(true);
+        setErrorPrompt(true);
+        setPromptTitle("Failed to delete");
+        setNotifMessage(response.feedback);
+        setConfirmation(false);
+        setIndexToDelete(null);
+        fetchUpdatedData();
+      }
+    });
+    console.log("HANDLE DELETE");
+  };
+
+
   return (
     <div className="w-full pb-20">
-      <div className="container mx-auto px-10" style={{ marginTop: '50px' }}>
+      <div className="container mx-auto px-10 flex" style={{ marginTop: '50px' }}>
         <div className="calendar">
           <DateRange
             editableDateInputs={false}
@@ -105,9 +140,9 @@ const Calendar = () => {
                 filteredActivities.map((activity, index) => (
                   <div key={index}>
                     <h5 className="text-1xl font-bold tracking-tight text-gray-900 dark:text-white">{activity.title}</h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">{activity.details}</p>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">Start Date: {activity.startDate}</p>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">End Date: {activity.endDate}</p>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">{activity.note}</p>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">Start Date: {activity.start}</p>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">End Date: {activity.end}</p>
                   </div>
                 ))
               ) : (
@@ -127,75 +162,24 @@ const Calendar = () => {
             >
               ADD ACTIVITY
             </button>
-
-            {showForm && (
-              <div>
-                <div className="modal-content">
-                  <span className="close" onClick={handleAddActivity}>
-                    &times;
-                  </span>
-                  <form onSubmit={handleSubmit}>
-                    <div>
-                      <label htmlFor="title">Activity Name:</label>
-                      <input
-                        type="text"
-                        id="title"
-                        value={formData.title}
-                        onChange={(e) =>
-                          setFormData({ ...formData, title: e.target.value })
-                        }
-                        required
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="details">Activity Details:</label>
-                      <textarea
-                        id="details"
-                        value={formData.details}
-                        onChange={(e) =>
-                          setFormData({ ...formData, details: e.target.value })
-                        }
-                        required
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="startDate">Start Date:</label>
-                      <input
-                        type="date"
-                        id="startDate"
-                        value={formData.startDate}
-                        onChange={(e) =>
-                          setFormData({ ...formData, startDate: e.target.value })
-                        }
-                        required
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="endDate">End Date:</label>
-                      <input
-                        type="date"
-                        id="endDate"
-                        value={formData.endDate}
-                        onChange={(e) =>
-                          setFormData({ ...formData, endDate: e.target.value })
-                        }
-                        required
-                        style={{ width: '100%' }}
-                      />
-                    </div>
-                    <button type="submit"
-                      className="text-white bg-primary-blue rounded-md p-2 flex-center"
-                      style={{ width: '100%', marginTop: '10px'}}
-                    >
-                    SUBMIT
-                    </button>
-                  </form>
-                </div>
-              </div>
-            )}
+          {showForm ? (
+          <>
+            <ActivityModal
+              activities={activities}
+              setActivities={setActivities}
+              action={action}
+              setOpenPrompt={setOpenPrompt}
+              setPromptTitle={setPromptTitle}
+              setNotifMessage={setNotifMessage}
+              setErrorPrompt={setErrorPrompt}
+              setConfirmation={setConfirmation}
+              onClose={() => setShowForm(false)}
+              fetchUpdatedData={fetchUpdatedData}
+              indexToEdit={indexToEdit}
+            />
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+          ) : null}
           </div>
         </div>
       </div>
@@ -205,10 +189,35 @@ const Calendar = () => {
             Summary of Activities
           </h4>
         </div>
-        <div style={{ marginBottom: '50px', marginTop: '20px' }} className="mx-16">
-          <Table content={ActivityData}/>
+        <div style={{ marginBottom: '50px', marginTop: '20px' }} className="mx-16"> 
+          <Table
+              data={{
+                columns: columns,
+                rows: activities,
+              }}
+              onEdit={handleUpdate}
+              onDelete={confirmDelete}
+              numberOfItemsPerPage={15}
+          />
         </div>
       </div>
+      <PromptModal
+        isOpen={openPrompt}
+        error={errorPrompt}
+        title={promptTitle}
+        setOpenModal={setOpenPrompt}
+        notifMessage={notifMessage}
+        confirmation={confirmation}
+        callback={(response) => {
+          if (response == true) {
+            if (action == "delete") {
+              handleDeleteActivity();
+            }
+          } else if (response == false) {
+            setIndexToDelete(null);
+          }
+        }}
+      />
     </div>
   );
 };
